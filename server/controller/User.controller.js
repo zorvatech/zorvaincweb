@@ -20,3 +20,13 @@ export const userRegistration = async (req, res, next) => {
     next();
   }
 };
+
+
+export const  getAllUsers = async (req , res , next ) => {
+    try {
+        const user = await User.find().select('-password');
+        res.status(201).json({ success: true, count: user.length , message: "User finded successfully",data: user})
+    } catch (error) {
+        next(error)
+    }
+}
