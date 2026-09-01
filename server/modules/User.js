@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true, lowercase: true,trim: true},
     password:{type:String,rquired:true},
     role:{type:String,required:true,enum:["admin","User"], default:"User"},
-    isactive:{Boolean,default:flase}
+    isactive:{type:Boolean,default:false}
 },{timestamps:true})
 
 //hasshing password
@@ -16,9 +16,8 @@ userSchema.pre("save",async function (next) {
     
 })
 
-//mathces password
-userSchema.mehthods.matchPassword=async function(entetrdPassword){
-    return await bcrypt.compare(entetrdPassword,this.password);
-}
+userSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
 
 export default mongoose.model("Users",userSchema);
