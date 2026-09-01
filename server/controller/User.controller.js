@@ -12,7 +12,7 @@ export const userRegistration = async (req, res, next) => {
       .json({
         success: true,
         message: "User registered successfully",
-        data: SaveData,
+        data: saveData,
       });
 
     res.status(201).json;
